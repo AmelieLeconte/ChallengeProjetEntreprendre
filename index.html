@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nom-du-projet</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .modal {
+            display: block;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .modal-content.type1 {
+            background-color: #00a816; /* Couleur pour le type 1 */
+        }
+
+        .modal-content.type2 {
+            background-color: #b32100; /* Couleur pour le type 2 */
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Popup Modal -->
+    <div id="popupModal" class="modal">
+        <div class="modal-content" id="modalContent">
+            <span class="close" onclick="document.getElementById('popupModal').style.display='none'">&times;</span>
+            <h2>Estimation Intelligence Artificielle</h2>
+            <h3 id="iaPercentage">% IA</h3>
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour obtenir la variable de l'URL
+        function getURLParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Récupérer la variable "variable" depuis l'URL
+        const maVariable = getURLParameter('variable');
+
+        // Injecter la variable dans l'élément avec l'id "iaPercentage"
+        if (maVariable) {
+            document.getElementById('iaPercentage').textContent = `${maVariable} % IA`;
+
+            // Déterminer la classe à ajouter en fonction de la variable
+            const modalContent = document.getElementById('modalContent');
+            if (maVariable < 50) {
+                modalContent.classList.add('type1');
+            } else if (maVariable > 50) {
+                modalContent.classList.add('type2');
+            } // Sinon, la modalContent gardera la classe par défaut
+        }
+
+        // Fonction pour vérifier si l'onglet est déjà ouvert
+        if (window.name === "") {
+            window.name = "monOngletUnique";
+        } else {
+            window.location.reload();
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+{# Fichier Twig #}
+{# Passer la variable directement à l'HTML #}
+{% set variable = app.request.query.get('variable')|default(0) %}
+
+<div id="popupModal" class="modal">
+    <div class="modal-content {% if variable < 50 %}type1{% elseif variable > 50 %}type2{% endif %}">
+        <span class="close" onclick="document.getElementById('popupModal').style.display='none'">&times;</span>
+        <h2>Estimation Intelligence Artificielle</h2>
+        <h3 id="iaPercentage">{{ variable }} % IA</h3>
+    </div>
+</div>
